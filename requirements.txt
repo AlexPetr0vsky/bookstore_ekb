@@ -1,13 +1,9 @@
 Flask
 requests
 bs4
-sqlalchemy
-flask_sqlalchemy
-sqlalchemy.orm
 flask_restful
 flask_wtf
 flask_login
 wtforms
-wtforms.validators
-werkzeug.urls
-werkzeug.utils
+werkzeug
+werkzeug
