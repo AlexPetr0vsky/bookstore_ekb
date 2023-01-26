@@ -5,5 +5,6 @@ flask_restful
 flask_wtf
 flask_login
 wtforms
-werkzeug
+sqlalchemy
+flask_sqlalchemy
 werkzeug
