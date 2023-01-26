@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <div style="display: flex" class="wrapper">
+  <div class="left-column">
+    <img width=200 style="margin-right: 15px; margin-top: 5px" src='../../{{author["photo"]}}' alt="Author image"/>
+  </div>
+  <div class="right-column"><!-- Product Description -->
+  <div class="product-description">
+  <h1>{{author["name"]}}</h1>
+    {% for item in info %}
+    <h5>{{item}}</h5>
+    {% endfor %}
+    {{about}}
+    <div style="text-align: right;">
+      <i>Information is taken from www.thefamouspeople.com
+      </i>
+    </div>
+  </div>
+  </div>
+</div>
+{% endblock %}
