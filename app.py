@@ -1,5 +1,3 @@
-import os
-import js2py
 import requests
 from bs4 import BeautifulSoup
 from flask import *
