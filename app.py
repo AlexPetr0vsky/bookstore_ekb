@@ -168,7 +168,7 @@ def register():
 def abort_if_book_not_found(book_id):
     book = session.query(Book).get(book_id)
     if not book:
-        abort(404, message=f"Book {book_id} not found")
+        abort(404, message="Book {book_id} not found".format(book_id))
 
 
 class BookResource(Resource):
