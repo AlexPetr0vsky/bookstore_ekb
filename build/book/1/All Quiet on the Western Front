@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <title></title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+<!--        <a class="navbar-brand" href="/search">Search</a>-->
+        <a class="navbar-brand" href="/authors">Authors</a>
+        <a class="navbar-brand" href="/contacts">Contacts</a>
+            
+        <a class="navbar-brand" href="/sign_in">Sign in</a>
+        <a href="/register">Register</a>
+            
+    </nav>
+</header>
+<main role="main" class="container">
+    
+        
+    
+    
+<div style="display: flex" class="wrapper">
+  <div class="left-column">
+    <img width=200 style="margin-right: 15px; margin-top: 5px" src='/static/img/all_quiet.jpg' alt="Book image"/>
+  </div>
+  <div class="right-column"><!-- Product Description -->
+  <div class="product-description">
+  <h1>All Quiet on the Western Front</h1>
+    Это рассказ о немецких мальчишках, которые под действием патриотической пропаганды идут на войну, не зная о том, что впереди их ждет не слава героев, а инвалидность и смерть…
+Каждый день войны уносит жизни чьих-то отцов, сыновей, а газеты тем временем бесстрастно сообщают: «На Западном фронте без перемен»…
+Эта книга – не обвинение, не исповедь.
+  </div>
+  <div>
+      <a class="btn btn-primary" href="/return-file/All%20Quiet%20on%20the%20Western%20Front.pdf" target="blank" >Download introduction PDF</a>
+  </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

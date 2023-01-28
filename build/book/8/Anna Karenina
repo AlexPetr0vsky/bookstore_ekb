@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <title></title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+<!--        <a class="navbar-brand" href="/search">Search</a>-->
+        <a class="navbar-brand" href="/authors">Authors</a>
+        <a class="navbar-brand" href="/contacts">Contacts</a>
+            
+        <a class="navbar-brand" href="/sign_in">Sign in</a>
+        <a href="/register">Register</a>
+            
+    </nav>
+</header>
+<main role="main" class="container">
+    
+        
+    
+    
+<div style="display: flex" class="wrapper">
+  <div class="left-column">
+    <img width=200 style="margin-right: 15px; margin-top: 5px" src='/static/img/anna_karenina.jpg' alt="Book image"/>
+  </div>
+  <div class="right-column"><!-- Product Description -->
+  <div class="product-description">
+  <h1>Anna Karenina</h1>
+    «Анна Каренина» — лучший роман о женщине, написанный в XIX веке. По словам Ф. М. Достоевского, «Анна Каренина» поразила современников «не только вседневностью содержания, но и огромной психологической разработкой души человеческой, страшной глубиной и силой». Уже к началу 1900-х годов роман Толстого был переведен на многие языки мира, а в настоящее время входит в золотой фонд мировой литературы.
+  </div>
+  <div>
+      <a class="btn btn-primary" href="/return-file/Anna%20Karenina.pdf" target="blank" >Download introduction PDF</a>
+  </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

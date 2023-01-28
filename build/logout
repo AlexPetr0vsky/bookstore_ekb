@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <title></title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+<!--        <a class="navbar-brand" href="/search">Search</a>-->
+        <a class="navbar-brand" href="/authors">Authors</a>
+        <a class="navbar-brand" href="/contacts">Contacts</a>
+            
+        <a class="navbar-brand" href="/sign_in">Sign in</a>
+        <a href="/register">Register</a>
+            
+    </nav>
+</header>
+<main role="main" class="container">
+    
+        
+    
+    
+<form class="form-group" action="/search/" method="get">
+  <input class="form-control" name="book" placeholder="Enter the book name..." type="search">
+    <button class="btn btn-primary" type="submit">Search</button>
+</form>
+<div class="col-md-8 products">
+	<div class="row">
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/1/All%20Quiet%20on%20the%20Western%20Front"><img width="120" src='static/img/all_quiet.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/1/All%20Quiet%20on%20the%20Western%20Front">Remarque E.M.</a>
+				</p>
+				<p class="product-desc">All Quiet on the Western Front</p>
+					<p class="product-download">
+						<a href="/book/1/All%20Quiet%20on%20the%20Western%20Front">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/2/Arch%20of%20Triumph"><img width="120" src='static/img/arch_of_triumph.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/2/Arch%20of%20Triumph">Remarque E.M.</a>
+				</p>
+				<p class="product-desc">Arch of Triumph</p>
+					<p class="product-download">
+						<a href="/book/2/Arch%20of%20Triumph">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/3/Three%20Comrades"><img width="120" src='static/img/three_comrades.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/3/Three%20Comrades">Remarque E.M.</a>
+				</p>
+				<p class="product-desc">Three Comrades</p>
+					<p class="product-download">
+						<a href="/book/3/Three%20Comrades">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/4/The%20castle"><img width="120" src='static/img/the_castle.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/4/The%20castle">Kafka Franz</a>
+				</p>
+				<p class="product-desc">The castle</p>
+					<p class="product-download">
+						<a href="/book/4/The%20castle">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/5/The%20Metamorphosis"><img width="120" src='static/img/the_metamorphosis.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/5/The%20Metamorphosis">Kafka Franz</a>
+				</p>
+				<p class="product-desc">The Metamorphosis</p>
+					<p class="product-download">
+						<a href="/book/5/The%20Metamorphosis">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/6/The%20Trial"><img width="120" src='static/img/the_trial.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/6/The%20Trial">Kafka Franz</a>
+				</p>
+				<p class="product-desc">The Trial</p>
+					<p class="product-download">
+						<a href="/book/6/The%20Trial">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/7/War%20and%20Peace"><img width="120" src='static/img/war_and_peace.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/7/War%20and%20Peace">Tolstoy Leo</a>
+				</p>
+				<p class="product-desc">War and Peace</p>
+					<p class="product-download">
+						<a href="/book/7/War%20and%20Peace">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/8/Anna%20Karenina"><img width="120" src='static/img/anna_karenina.jpg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/8/Anna%20Karenina">Tolstoy Leo</a>
+				</p>
+				<p class="product-desc">Anna Karenina</p>
+					<p class="product-download">
+						<a href="/book/8/Anna%20Karenina">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="product">
+				<div class="product-img">
+					<a href="/book/9/Resurrection"><img width="120" src='static/img/resurrection.jpeg' alt="Book image"></a>
+				</div>
+				<p class="product-title">
+					<a href="/book/9/Resurrection">Tolstoy Leo</a>
+				</p>
+				<p class="product-desc">Resurrection</p>
+					<p class="product-download">
+						<a href="/book/9/Resurrection">
+							Download >>
+						</a>
+					</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</main>
+</body>
+</html>
