@@ -1,13 +1,13 @@
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from sqlalchemy_serializer import SerializerMixin
+from flask_login import UserMixin
 
 
 Base = declarative_base()
 
 
-class Author(Base, SerializerMixin):
+class Author(Base, UserMixin):
     __tablename__ = 'authors'
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
@@ -15,7 +15,7 @@ class Author(Base, SerializerMixin):
     wiki = Column(String(100), nullable=False)
 
 
-class Book(Base, SerializerMixin):
+class Book(Base, UserMixin):
     __tablename__ = 'books'
     id = Column(Integer, primary_key=True)
     book = Column(String(100), nullable=False)
@@ -25,7 +25,7 @@ class Book(Base, SerializerMixin):
     author = relationship("Author", backref="books")
 
 
-class User(Base, SerializerMixin):
+class User(Base, UserMixin):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String(64), index=True, unique=True)
