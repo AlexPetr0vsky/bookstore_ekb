@@ -1,14 +1,13 @@
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-# from sqlalchemy_serializer import SerializerMixin
-from marshmallow import Schema
+from sqlalchemy_serializer import SerializerMixin
 
 
 Base = declarative_base()
 
 
-class Author(Base, Schema):
+class Author(Base, SerializerMixin):
     __tablename__ = 'authors'
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
@@ -16,7 +15,7 @@ class Author(Base, Schema):
     wiki = Column(String(100), nullable=False)
 
 
-class Book(Base, Schema):
+class Book(Base, SerializerMixin):
     __tablename__ = 'books'
     id = Column(Integer, primary_key=True)
     book = Column(String(100), nullable=False)
@@ -26,7 +25,7 @@ class Book(Base, Schema):
     author = relationship("Author", backref="books")
 
 
-class User(Base, Schema):
+class User(Base, SerializerMixin):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String(64), index=True, unique=True)
