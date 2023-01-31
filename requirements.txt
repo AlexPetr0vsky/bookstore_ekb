@@ -8,5 +8,5 @@ wtforms
 sqlalchemy
 flask_sqlalchemy
 werkzeug
-sqlalchemy_serializer
+SQLAlchemy-serializer
 frozen-flask
