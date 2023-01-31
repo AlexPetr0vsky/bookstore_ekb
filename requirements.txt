@@ -10,3 +10,4 @@ flask_sqlalchemy
 werkzeug
 SQLAlchemy-serializer
 frozen-flask
+marshmallow
