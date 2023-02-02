@@ -35,5 +35,3 @@ class User(Base, SerializerMixin):
     def __repr__(self):
         return '<User {}>'.format(self.name)
 
-
-user = User(name='test', email='test@test.com')

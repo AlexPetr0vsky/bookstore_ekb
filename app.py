@@ -1,4 +1,5 @@
 import requests
+import os.path
 from bs4 import BeautifulSoup
 from flask import *
 from sqlalchemy import create_engine, exc
@@ -25,7 +26,9 @@ db = SQLAlchemy(app)
 api = Api(app)
 
 
-engine = create_engine('sqlite:///books.db?check_same_thread=False', echo=True)
+base_dir = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(base_dir, "books.db")
+engine = create_engine('sqlite:///{}?check_same_thread=False'.format(db_path))
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
