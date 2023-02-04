@@ -1,6 +1,7 @@
 import requests
 import os.path
 from bs4 import BeautifulSoup
+from itertools import chain
 from flask import *
 from sqlalchemy import create_engine, exc
 from flask_sqlalchemy import SQLAlchemy
@@ -84,13 +85,18 @@ def authors_wiki(author_id):
     url = session.query(Author.wiki).filter_by(id=author_id).one()[0]
     response = requests.get(url)
     doc = BeautifulSoup(response.text, 'lxml')
-    intro = doc.body.find(id='intro').text
-    info = doc.body.find_all(class_="quickfactsdata tq")
-    info_set = set()
-    for i in info:
-        i = i.text
-        info_set.add(i)
-    return render_template('about.html', author=author, about=intro, info=info_set)
+    intro = doc.body.find_all('p')[2].text
+    labels = doc.body.find_all('th', attrs={'class': 'infobox-label'})
+    labels_list = [x.text for x in labels]
+    # for i in labels:
+    #     i = i.text
+    #     labels_list.append(i)
+    data = doc.body.find_all('td', attrs={'class': 'infobox-data'})
+    data_list = [x.text for x in data]
+    # for i in data:
+    #     i = i.text
+    #     data_list.append(i)
+    return render_template('about.html', author=author, about=intro, data=data_list, labels=labels_list)
 
 
 @app.route('/contacts')

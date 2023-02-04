@@ -6,14 +6,26 @@
     <img width=200 style="margin-right: 15px; margin-top: 5px" src='../../{{author["photo"]}}' alt="Author image"/>
   </div>
   <div class="right-column"><!-- Product Description -->
-  <div class="product-description">
+  <div style="display: inline-block" class="product-description">
   <h1>{{author["name"]}}</h1>
-    {% for item in info %}
-    <h5>{{item}}</h5>
+    <table cellspacing="0" style="display: table;">
+    {% for item in range(labels|length) %}
+      <tr>
+        <th valign="top" style="display: table-cell; padding: 3px;">
+          {{labels[item]}}
+        </th>
+        <td valign="top" style="display: table-cell; padding: 3px;">
+          {{data[item]}}
+        </td>
+      </tr>
     {% endfor %}
-    {{about}}
+    </table>
+    <br>
+    <div style="display: block;">
+      {{about}}
+    </div>
     <div style="text-align: right;">
-      <i>Information is taken from www.thefamouspeople.com
+      <i>Information is taken from www.wikipedia.org
       </i>
     </div>
   </div>
