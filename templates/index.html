@@ -17,6 +17,7 @@
 					<a href="{{ url_for('get_book', book_id=item['id'], filename=item['book']) }}">{{item["name"]}}</a>
 				</p>
 				<p class="product-desc">{{item["book"]}}</p>
+					<a href="{{ url_for('get_book', book_id=item['id'], filename=item['book']) }}">{{item["name"]}}</a>
 					<p class="product-download">
 						<a href="{{ url_for('get_book', book_id=item['id'], filename=item['book']) }}">
 							Download >>
