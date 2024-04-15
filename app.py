@@ -88,14 +88,8 @@ def authors_wiki(author_id):
     intro = doc.body.find_all('p')[2].text
     labels = doc.body.find_all('th', attrs={'class': 'infobox-label'})
     labels_list = [x.text for x in labels]
-    # for i in labels:
-    #     i = i.text
-    #     labels_list.append(i)
     data = doc.body.find_all('td', attrs={'class': 'infobox-data'})
     data_list = [x.text for x in data]
-    # for i in data:
-    #     i = i.text
-    #     data_list.append(i)
     return render_template('about.html', author=author, about=intro, data=data_list, labels=labels_list)
 
 
@@ -159,10 +153,17 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 
+def redirect_to_index_if_authenticated(func):
+    def wrapper():
+        if current_user.is_authenticated:
+            return redirect(url_for('index'))
+        return func()
+    return wrapper
+
+
 @app.route('/register', methods=['GET', 'POST'])
+@redirect_to_index_if_authenticated
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(name=form.username.data, email=form.email.data)
@@ -185,7 +186,7 @@ class BookResource(Resource):
         abort_if_book_not_found(book_id)
         book = session.query(Book).get(book_id)
         return jsonify(
-                book.to_dict(only=('id', 'book'))
+            book.to_dict(only=('id', 'book'))
         )
 
 
