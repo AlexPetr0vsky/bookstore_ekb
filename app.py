@@ -1,3 +1,5 @@
+from functools import wraps
+
 import requests
 import os.path
 from bs4 import BeautifulSoup
@@ -154,10 +156,11 @@ class RegistrationForm(FlaskForm):
 
 
 def redirect_to_index_if_authenticated(func):
-    def wrapper():
+    @wraps(func)
+    def wrapper(*args, **kwargs):
         if current_user.is_authenticated:
             return redirect(url_for('index'))
-        return func()
+        return func(*args, **kwargs)
     return wrapper
 
 
