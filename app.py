@@ -1,24 +1,22 @@
+from contextlib import contextmanager
 from functools import wraps
 
 import requests
 import os.path
 from bs4 import BeautifulSoup
-from itertools import chain
 from flask import *
 from sqlalchemy import create_engine, exc
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
 from db_setup import Book, Author, Base, User
-from flask_restful import reqparse, abort, Api, Resource
+from flask_restful import abort, Api, Resource
 from flask_wtf import FlaskForm
 from flask_login import *
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from config import Config
 from werkzeug.urls import url_parse
-from werkzeug.utils import secure_filename
 from models import User
-
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -28,18 +26,35 @@ login.login_view = 'login'
 db = SQLAlchemy(app)
 api = Api(app)
 
-
 base_dir = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(base_dir, "books.db")
 engine = create_engine('sqlite:///{}?check_same_thread=False'.format(db_path))
 Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+SessionLocal = sessionmaker(bind=engine)
+
+
+@contextmanager
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def with_session(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        with get_db() as db:
+            return func(db, *args, **kwargs)
+
+    return wrapper
 
 
 @app.route('/')
-def index():
-    query = session.query(Book, Author)
+@with_session
+def index(db):
+    query = db.query(Book, Author)
     query = query.join(Author, Book.author_id == Author.id)
     query_all = query.all()
     query_list = []
@@ -52,7 +67,8 @@ def index():
 
 
 @app.route('/api/books', methods=['POST'])
-def create_book():
+@with_session
+def create_book(db):
     if not request.json:
         return jsonify({'error': 'Empty request'})
     elif not all(key in request.json for key in
@@ -63,28 +79,30 @@ def create_book():
         photo=request.json['photo'],
         wiki=request.json['wiki']
     )
-    author_id = session.query(Author.id).filter(Author.name == request.json['name'])
+    author_id = db.query(Author.id).filter(Author.name == request.json['name'])
     book = Book(
         book=request.json['book'],
         description=request.json['description'],
         icon_book=request.json['icon_book'],
         author_id=author_id
     )
-    session.add_all([author, book])
-    session.commit()
+    db.add_all([author, book])
+    db.commit()
     return jsonify({'success': 'OK'})
 
 
 @app.route('/authors')
-def get_authors():
-    authors = session.query(Author).distinct(Author.name).all()
+@with_session
+def get_authors(db):
+    authors = db.query(Author).distinct(Author.name).all()
     return render_template('authors.html', authors=authors)
 
 
 @app.route('/authors/<int:author_id>/about')
-def authors_wiki(author_id):
-    author = session.query(Author).filter_by(id=author_id).one()
-    url = session.query(Author.wiki).filter_by(id=author_id).one()[0]
+@with_session
+def authors_wiki(db, author_id):
+    author = db.query(Author).filter_by(id=author_id).one()
+    url = db.query(Author.wiki).filter_by(id=author_id).one()[0]
     response = requests.get(url)
     doc = BeautifulSoup(response.text, 'lxml')
     intro = doc.body.find_all('p')[2].text
@@ -108,17 +126,19 @@ class LoginForm(FlaskForm):
 
 
 @login.user_loader
-def load_user(id):
-    return session.query(User).get(int(id))
+@with_session
+def load_user(db, id):
+    return db.query(User).get(int(id))
 
 
 @app.route('/sign_in', methods=['GET', 'POST'])
-def login():
+@with_session
+def login(db):
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = session.query(User).filter_by(name=form.username.data).first()
+        user = db.query(User).filter_by(name=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
@@ -145,14 +165,16 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = session.query(User).filter_by(name=username.data).first()
-        if user is not None:
-            raise ValidationError('Please use a different username.')
+        with get_db() as db:
+            user = db.query(User).filter_by(name=username.data).first()
+            if user is not None:
+                raise ValidationError('Please use a different username.')
 
     def validate_email(self, email):
-        user = session.query(User).filter_by(email=email.data).first()
-        if user is not None:
-            raise ValidationError('Please use a different email address.')
+        with get_db() as db:
+            user = db.query(User).filter_by(email=email.data).first()
+            if user is not None:
+                raise ValidationError('Please use a different email address.')
 
 
 def redirect_to_index_if_authenticated(func):
@@ -161,6 +183,7 @@ def redirect_to_index_if_authenticated(func):
         if current_user.is_authenticated:
             return redirect(url_for('index'))
         return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -178,32 +201,35 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
-def abort_if_book_not_found(book_id):
-    book = session.query(Book).get(book_id)
+def abort_if_book_not_found(db, book_id):
+    book = db.query(Book).get(book_id)
     if not book:
         abort(404, message="Book {book_id} not found".format(book_id))
 
 
 class BookResource(Resource):
-    def get(self, book_id):
-        abort_if_book_not_found(book_id)
-        book = session.query(Book).get(book_id)
+    @with_session
+    def get(self, db, book_id):
+        abort_if_book_not_found(db, book_id)
+        book = db.query(Book).get(book_id)
         return jsonify(
             book.to_dict(only=('id', 'book'))
         )
 
 
 @app.route('/book/<int:book_id>/<string:filename>', methods=['GET'])
-def get_book(book_id, filename):
-    book = session.query(Book).filter_by(id=book_id).one()
+@with_session
+def get_book(db, book_id, filename):
+    book = db.query(Book).filter_by(id=book_id).one()
     return render_template('book.html', book=book, value=filename)
 
 
 @app.route('/search/', methods=['GET'])
-def search_book():
+@with_session
+def search_book(db):
     try:
         book_name = request.args.get('book')
-        books = session.query(Book).filter(Book.book.ilike("%{}%".format(book_name))).all()
+        books = db.query(Book).filter(Book.book.ilike("%{}%".format(book_name))).all()
         return render_template('search.html', books=books)
     except exc.NoResultFound:
         return render_template('search.html')
@@ -213,6 +239,7 @@ UPLOAD_FOLDER = 'static/files/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
+# Функция для добавление книги
 # @app.route('/uploadfile', methods=['GET', 'POST'])
 # def upload_file():
 #     if request.method == 'POST':
@@ -234,11 +261,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route('/return-file/<filename>')
 def return_files(filename):
     try:
-        file_path = UPLOAD_FOLDER + filename
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         return send_file(file_path, as_attachment=True, download_name='')
     except FileNotFoundError:
         return 'Book not found! We are sorry!'
 
 
 api.add_resource(BookResource, '/book/<int:book_id>')
-
