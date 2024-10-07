@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <title></title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+<!--        <a class="navbar-brand" href="/search">Search</a>-->
+        <a class="navbar-brand" href="/authors">Authors</a>
+        <a class="navbar-brand" href="/contacts">Contacts</a>
+            
+        <a class="navbar-brand" href="/sign_in">Sign in</a>
+        <a href="/register">Register</a>
+            
+    </nav>
+</header>
+<main role="main" class="container">
+    
+        
+    
+    
+<div style="display: flex" class="wrapper">
+  <div class="left-column">
+    <img width=200 style="margin-right: 15px; margin-top: 5px" src='/static/img/war_and_peace.jpg' alt="Book image"/>
+  </div>
+  <div class="right-column"><!-- Product Description -->
+  <div class="product-description">
+  <h1>War and Peace</h1>
+    Хорошо известный классический роман-эпопея Льва Толстого рассказывает о сложном, бурном периоде в истории России и всей Европы — эпохе завоевательных походов императора Наполеона в Восточную Европу и Россию, с 1805 по 1812 год. Автор подробно рассказывает о Войне — о ходе боевых действий от Аустерлица до Бородино и Березины; и о Мире — показана жизнь в России в это же время, причем пером писателя охвачены все слои общества — дворянские семьи, крестьяне, горожане, солдаты и даже императоры. В этом большом, многоплановом романе действуют десятки и сотни персонажей — и в их числе реальные исторические лица, при помощи которых Толстой старается изобразить жизнь в ту эпоху во всем ее многообразии. Часто автор отступает от основных событий романа и излагает свое мнение и взгляды по множеству вопросов — он говорит об исторической науке, о социологии и психологии, морали и нравственности, свободе и необходимости.
+  </div>
+  <div>
+      <a class="btn btn-primary" href="/return-file/War%20and%20Peace.pdf" target="blank" >Download introduction PDF</a>
+  </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

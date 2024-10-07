@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="../static/css/custom.css" />
+    <title></title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">Main</a>
+<!--        <a class="navbar-brand" href="/search">Search</a>-->
+        <a class="navbar-brand" href="/authors">Authors</a>
+        <a class="navbar-brand" href="/contacts">Contacts</a>
+            
+        <a class="navbar-brand" href="/sign_in">Sign in</a>
+        <a href="/register">Register</a>
+            
+    </nav>
+</header>
+<main role="main" class="container">
+    
+        
+    
+    
+<div style="display: flex;">
+    
+<div>
+    <a align="center" href="/authors/1/about" class="text">
+        <h2>Remarque E.M.</h2>
+    </a>
+    <a href="/authors/1/about">
+        <img class="img2" src='static/img/remarque.jpg' alt="Author's photo">
+    </a>
+</div>
+    
+<div>
+    <a align="center" href="/authors/2/about" class="text">
+        <h2>Kafka Franz</h2>
+    </a>
+    <a href="/authors/2/about">
+        <img class="img2" src='static/img/kafka.jpg' alt="Author's photo">
+    </a>
+</div>
+    
+<div>
+    <a align="center" href="/authors/3/about" class="text">
+        <h2>Tolstoy Leo</h2>
+    </a>
+    <a href="/authors/3/about">
+        <img class="img2" src='static/img/tolstoy.jpg' alt="Author's photo">
+    </a>
+</div>
+    
+</div>
+
+</main>
+</body>
+</html>
