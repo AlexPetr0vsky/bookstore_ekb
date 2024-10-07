@@ -8,7 +8,7 @@ from flask import *
 from sqlalchemy import create_engine, exc
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import sessionmaker
-from db_setup import Book, Author, Base, User
+from db_setup import Book, Author, Base
 from flask_restful import abort, Api, Resource
 from flask_wtf import FlaskForm
 from flask_login import *
@@ -111,11 +111,6 @@ def authors_wiki(db, author_id):
     data = doc.body.find_all('td', attrs={'class': 'infobox-data'})
     data_list = [x.text for x in data]
     return render_template('about.html', author=author, about=intro, data=data_list, labels=labels_list)
-
-
-@app.route('/contacts')
-def contacts():
-    return render_template('contacts.html')
 
 
 class LoginForm(FlaskForm):
